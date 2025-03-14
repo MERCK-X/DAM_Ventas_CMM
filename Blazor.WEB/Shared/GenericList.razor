@@ -1,0 +1,54 @@
+﻿@typeparam TItem
+
+@if (MyList == null)
+{
+    @if(Loading == null)
+    {
+        <div class="align-items-center">
+            <img src="https://i.gifer.com/VAyR.gif" />
+        </div>
+    }
+    else
+    {
+        @Loading
+    }
+}
+else 
+{
+    if (MyList.Count == 0)
+    {
+        @if (NoRecords is null)
+        {
+            <div class="alert alert-warning">
+                No hay registros          
+            </div>
+        }
+        else
+        {
+            @NoRecords
+        }
+    }
+    else
+    {
+        @Body
+    }
+}
+
+
+@code 
+{
+    [Parameter]
+    public RenderFragment? Loading { get; set; }
+
+    [Parameter]
+    public RenderFragment? NoRecords { get; set; }
+
+    //Parametros obligatorios
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment? Body { get; set; } = null!;
+
+    [Parameter]
+    [EditorRequired]
+    public List<TItem> MyList { get; set; } = null!;
+}
